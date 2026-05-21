@@ -120,8 +120,10 @@ async function readGcsBlobData() {
             throw new Error(`HTTP error! Status: ${response.status} (${response.statusText})`);
         }
         
+         const lastModifiedHeader = response.headers.get('Last-Modified');
+
         const csvText = await response.text();
-	build(csvText, "MerchPlanDynamicCSV.csv")
+	build(csvText, lastModifiedHeader)
         console.log("GCS File content loaded successfully:");
         console.log(csvText);
         
