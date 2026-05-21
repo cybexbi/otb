@@ -3,7 +3,7 @@
 // Bump CACHE_VERSION whenever the report content changes — old clients
 // will then fetch the updated assets on next activation.
 
-const CACHE_VERSION = 'cybex-report-v1';
+const CACHE_VERSION = 'cybex-otb-v2';
 const ASSETS = [
   './',
   './index.html',
