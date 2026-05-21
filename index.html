@@ -121,9 +121,28 @@ async function readGcsBlobData() {
         }
         
          const lastModifiedHeader = response.headers.get('Last-Modified');
+        let fileTimestamp = "Unknown";
+        
+        if (lastModifiedHeader) {
+            const dateObj = new Date(lastModifiedHeader);
+            
+            // Options to explicitly format the local date and show the timezone name
+            const formatOptions = { 
+                year: 'numeric', 
+                month: 'numeric', 
+                day: 'numeric', 
+                hour: 'numeric', 
+                minute: 'numeric', 
+                second: 'numeric',
+                timeZoneName: 'short' // Appends local timezone abbreviation (e.g., EST, PDT, GMT+2)
+            };
+            
+            // Converts UTC string dynamically to the user's local timezone
+            fileTimestamp = dateObj.toLocaleString(navigator.language, formatOptions); 
+        }
 
         const csvText = await response.text();
-	build(csvText, lastModifiedHeader)
+	build(csvText, fileTimestamp)
         console.log("GCS File content loaded successfully:");
         console.log(csvText);
         
@@ -311,16 +330,18 @@ function build(csvText, fileName){
       StockLY: num(r.StockLY)
     })).filter(r=>r.MX>0);
 
-    const d2025 = hasYR ? data.filter(r=>r.YR===2025) : data;
-
-    if(!d2025.length){ setErr("No rows found for YR=2025 (or dataset empty)."); return; }
-
-    // Title
+	// Title
     const titleGuess = fileName.toLowerCase().includes("clothing") ? "Clothing" :
                        fileName.toLowerCase().includes("souvenir") ? "Souvenirs" : "Merchandise";
     document.getElementById("title").textContent = `2026 Assortment Plan — 2025 Retail Calendar White Space Analysis (${titleGuess})`;
     document.getElementById("subtitle").innerHTML =
-      `Audience: Retail Executives &amp; Senior Assortment Planners · Dataset: <span class="mono">${escapeHtml(fileName)}</span> · Stock/StockLY assumed <b>Retail EOM</b>.`;
+      `Audience: Retail Executives &amp; Senior Assortment Planners · Updated: <span class="mono">${escapeHtml(fileName)}</span> · Stock/StockLY assumed <b>Retail EOM</b>.`;
+
+    const d2025 = hasYR ? data.filter(r=>r.YR===2025) : data;
+
+    if(!d2025.length){ setErr("No rows found for YR=2025 (or dataset empty)."); return; }
+
+    
 
     // Months
     const months = Array.from(new Set(d2025.map(r=>r.MX))).sort((a,b)=>a-b);
