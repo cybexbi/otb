@@ -79,7 +79,6 @@
 
 <header class="card">
   <h1 id="title">2026 Assortment Plan — 2025 Retail Calendar White Space Analysis</h1>
-
  <div class="subhead" id="subtitle">
       </div>
 
@@ -110,44 +109,29 @@
   }
 
 
-const blobUrl = "https://cybexdw.blob.core.windows.net/data/MerchPlanDynamicCSV.csv?sp=r&st=2026-05-20T15:30:51Z&se=2029-05-01T23:45:51Z&spr=https&sv=2026-02-06&sr=b&sig=xxFMO1RUiRqNvPPte1ITWT6PN9VuNfl5RcUYraIVA9U%3D";
+const gcsUrl = "https://storage.googleapis.com/cybexbi/MerchPlanDynamicCSV.csv";
 
-async function diagnoseAndReadBlob() {
-    // 1. Detect if running from a local file protocol (file://)
-    if (window.location.protocol === 'file:') {
-        alert("CRITICAL ERROR:\nYou are running this HTML file directly from your hard drive (file://).\n\nBrowsers block all JavaScript fetch requests from local files due to security. You MUST run this code through a local web server (like VS Code Live Server or Node.js localhost).");
-        return;
-    }
-
+async function readGcsBlobData() {
     try {
-        // 2. Add cache-buster to prevent browser from reusing old 'No-CORS' download headers
-        const freshUrl = `${blobUrl}&_cb=${Date.now()}`;
-        
-        const response = await fetch(freshUrl, { 
-            method: 'GET',
-            mode: 'cors', // Forces browser to evaluate Azure CORS headers
-            headers: {
-                'Accept': 'text/csv, text/plain, */*'
-            }
-        });
+        // Fetch the file using the native fetch API
+        const response = await fetch(gcsUrl);
         
         if (!response.ok) {
-            const errorXml = await response.text();
-            alert(`Azure responded, but rejected the token:\nStatus: ${response.status}\n\nDetails: ${errorXml}`);
-            return;
+            throw new Error(`HTTP error! Status: ${response.status} (${response.statusText})`);
         }
         
         const csvText = await response.text();
-	build(csvText, "MerchPlanDynamicCSV.csv");
-	               console.log(csvText);
+	build(csvText, "MerchPlanDynamicCSV.csv")
+        console.log("GCS File content loaded successfully:");
+        console.log(csvText);
         
     } catch (error) {
-        // 3. Capture the exact browser network rejection
-        alert(`BROWSER BLOCK DETECTED:\n\nType: ${error.name}\nMessage: ${error.message}\n\nThis confirms Azure's CORS configuration does not match your current local web server address.`);
+        alert(`Failed to read GCS file!\n\nError: ${error.message}\n\n*Note: If you see a CORS error, you must enable CORS on your Google Cloud Storage bucket.`);
+        console.error(error);
     }
 }
 
-diagnoseAndReadBlob();
+readGcsBlobData();
 
 
 /* ---------- Utilities ---------- */
