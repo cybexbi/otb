@@ -114,7 +114,7 @@ const gcsUrl = "https://storage.googleapis.com/cybexbi/MerchPlanDynamicCSV.csv";
 async function readGcsBlobData() {
     try {
         // Fetch the file using the native fetch API
-        const response = await fetch(gcsUrl);
+        const response = await fetch(gcsUrl, { cache: 'no-store' });
         
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status} (${response.statusText})`);
