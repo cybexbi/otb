@@ -37,4 +37,5 @@ jobs:
           package: '.'
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
           sku: 'flexconsumption' # Tells the deployment task to bypass the legacy Kudu API
+          remote-build: true # Required for Node applications on Flex Consumption
 
