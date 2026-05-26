@@ -11,5 +11,5 @@
     "fast-xml-parser": "^5.8.0",
     "mssql": "^12.5.4"
   },
-  "main": "src/{index.js,functions/*.js}"
+  "main": "functions/*.js"
 }
