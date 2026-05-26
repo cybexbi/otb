@@ -29,10 +29,10 @@ jobs:
           npm install
           popd
 
-      # This replaces the hardcoded secret check with your linked Azure app instance
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         with:
           app-name: 'cybexbi-otb-api'
           slot-name: 'production'
           package: '.'
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
