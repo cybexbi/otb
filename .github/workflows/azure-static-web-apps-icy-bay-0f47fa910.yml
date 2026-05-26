@@ -27,7 +27,7 @@ jobs:
           ###### Clean Consolidated Build Overrides ######
           app_location: "/"
           api_location: "/"
-          output_location: ""
+          output_location: "/"
           app_build_command: "echo 'Bypassing App Build'"
           api_build_command: "npm install" # Directly commands the engine to only focus on mssql dependencies
           ###### End of Repository/Build Configurations ######
