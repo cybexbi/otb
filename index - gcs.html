@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<title>2026 Assortment Plan — 2025 Retail Calendar White Space Analysis</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;}
+  :root{
+    --bg:#f6f7fb; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e5e7eb;
+    --ok:#0f766e; --warn:#b45309; --risk:#b91c1c; --note:#1d4ed8;
+  }
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Calibri,Arial,sans-serif;}
+  .wrap{max-width:1140px;margin:18px auto;padding:0 14px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:0 1px 2px rgba(0,0,0,.04);}
+  header.card{padding:18px 18px 14px 18px;}
+  h1{font-size:20px;margin:0 0 6px 0;}
+  h2{font-size:16px;margin:0 0 10px 0;}
+  h3{font-size:13px;margin:14px 0 8px 0;color:#111827;}
+  .subhead{color:var(--muted);font-size:13px;line-height:1.35;}
+  .toc{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;}
+  .toc a{font-size:12px;color:#0b5cab;text-decoration:none;background:#f1f5f9;border:1px solid var(--border);padding:6px 10px;border-radius:999px;}
+  .toc a:hover{background:#e8eef7;}
+  section.card{padding:14px 18px;margin-top:12px;}
+  .kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;}
+  .kpi{border:1px solid var(--border);border-radius:12px;padding:10px;background:#fbfcfe;}
+  .kpi-title{font-size:11px;color:var(--muted);margin-bottom:6px;}
+  .kpi-val{font-size:15px;font-weight:700;letter-spacing:.2px;}
+  .kpi-sub{font-size:11px;color:var(--muted);margin-top:4px;}
+  @media (max-width:1100px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr));}}
+  @media (max-width:640px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  .bullets{margin:8px 0 0 18px;padding:0;}
+  .bullets li{margin:6px 0;color:#111827;font-size:13px;line-height:1.35;}
+  .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--border);background:#f8fafc;}
+  .tag-ok{color:var(--ok);background:#ecfdf5;border-color:#c7f1dc;}
+  .tag-warn{color:var(--warn);background:#fffbeb;border-color:#fde68a;}
+  .tag-risk{color:var(--risk);background:#fef2f2;border-color:#fecaca;}
+  .tag-note{color:var(--note);background:#eff6ff;border-color:#bfdbfe;}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+  .tbl{width:100%;border-collapse:separate;border-spacing:0;margin-top:8px;font-size:12.5px;}
+  .tbl th,.tbl td{border-bottom:1px solid var(--border);padding:8px 8px;vertical-align:top;}
+  .tbl th{text-align:left;color:#0f172a;background:#f8fafc;position:sticky;top:0;z-index:1;}
+  .tbl tr:nth-child(even) td{background:#fcfdff;}
+  .tbl .num{text-align:right;white-space:nowrap;}
+  .bar{height:10px;background:#eef2f7;border:1px solid var(--border);border-radius:999px;overflow:hidden;}
+  .bar span{display:block;height:100%;background:#93c5fd;}
+  .sub{color:var(--muted);font-size:11px;margin-top:4px;}
+  .note{color:var(--muted);font-size:11px;margin-top:6px;}
+  .callout{border:1px solid var(--border);border-left:4px solid #93c5fd;background:#f8fbff;border-radius:12px;padding:10px 12px;}
+  .callout b{display:block;margin-bottom:4px;}
+  .grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;}
+  @media (max-width:980px){.grid2{grid-template-columns:1fr;}}
+  .table-wrap{max-width:1120px;margin:0 auto;overflow-x:auto;border-radius:10px;padding-bottom:6px;-webkit-overflow-scrolling:touch;}
+  table.heat{width:100%;border-collapse:collapse;font-size:12px;background:#fff;}
+  table.heat th,table.heat td{border-bottom:1px solid var(--border);padding:8px 6px;vertical-align:top;white-space:nowrap;}
+  table.heat th{font-size:11px;color:var(--muted);font-weight:650;background:#f8fafc;}
+  .heatmap{width:max-content;min-width:100%;border-collapse:separate;border-spacing:0;margin-top:8px;font-size:11.5px;}
+  .heatmap th,.heatmap td{border-bottom:1px solid var(--border);border-right:1px solid var(--border);padding:6px 6px;vertical-align:top;}
+  .heatmap th{background:#f8fafc;text-align:center;}
+  .heatmap td{text-align:center;min-width:76px;}
+  .heatmap .sticky{position:sticky;left:0;background:#fff;z-index:2;border-right:1px solid var(--border);}
+  .heatmap th.sticky{z-index:3;background:#f8fafc;}
+  .cell .val{font-weight:700;font-size:11.5px;}
+  details{margin-top:10px;}
+  summary{cursor:pointer;color:#0b5cab;font-size:12.5px;}
+  .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .btn{appearance:none;border:1px solid var(--border);background:#f8fafc;border-radius:10px;padding:8px 10px;font-size:12.5px;cursor:pointer}
+  .btn:hover{background:#eef2f7}
+  .file{border:1px dashed var(--border);background:#fff;border-radius:12px;padding:10px}
+  .err{color:var(--risk);font-size:12px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="card">
+  <h1 id="title">2026 Assortment Plan — 2025 Retail Calendar White Space Analysis</h1>
+ <div class="subhead" id="subtitle">
+      </div>
+
+    <div class="toc" style="margin-top:12px">
+    <a href="#snapshot">Portfolio Snapshot</a>
+    <a href="#calendar">Retail Calendar 2025</a>
+    <a href="#mix">Mix White Space (Sales vs Stock)</a>
+    <a href="#category-summary">Category Summary</a>
+    <a href="#pockets">Tightness &amp; Over-Exposure Pockets</a>
+    <a href="#class-heatmaps">Class Heatmaps</a>
+    <a href="#assumptions">Assumptions</a>
+  </div>
+
+  <div id="err" class="err"></div>
+</header>
+
+<div id="report"></div>
+
+</div>
+
+<script>
+
+ if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('service-worker.js')
+        .catch(function (err) { console.warn('SW registration failed:', err); });
+    });
+  }
+
+
+const gcsUrl = "https://storage.googleapis.com/cybexbi/MerchPlanDynamicCSV.csv";
+
+async function readGcsBlobData() {
+    try {
+        // Fetch the file using the native fetch API
+        const response = await fetch(gcsUrl);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status} (${response.statusText})`);
+        }
+        
+ const lastModifiedHeader = response.headers.get('Last-Modified');
+        let fileTimestamp = "Unknown";
+        
+        if (lastModifiedHeader) {
+            const dateObj = new Date(lastModifiedHeader);
+            
+            // Options to explicitly format the local date and show the timezone name
+            const formatOptions = { 
+                year: 'numeric', 
+                month: 'numeric', 
+                day: 'numeric', 
+                hour: 'numeric', 
+                minute: 'numeric', 
+                second: 'numeric',
+                timeZoneName: 'short' // Appends local timezone abbreviation (e.g., EST, PDT, GMT+2)
+            };
+            
+            // Converts UTC string dynamically to the user's local timezone
+            fileTimestamp = dateObj.toLocaleString(navigator.language, formatOptions); 
+        }
+
+
+        const csvText = await response.text();
+	build(csvText, fileTimestamp)
+        console.log("GCS File content loaded successfully:");
+        console.log(csvText);
+        
+    } catch (error) {
+        alert(`Failed to read GCS file!\n\nError: ${error.message}\n\n*Note: If you see a CORS error, you must enable CORS on your Google Cloud Storage bucket.`);
+        console.error(error);
+    }
+}
+
+readGcsBlobData();
+
+
+/* ---------- Utilities ---------- */
+function num(x){ const v = Number(String(x ?? "").replace(/[$,%\s]/g,"")); return Number.isFinite(v) ? v : 0; }
+function isBlank(x){ return x===null || x===undefined || String(x).trim()===""; }
+function fmtMoney(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
+function fmtPct(n, d=1){ return (Number.isFinite(n) ? n.toFixed(d) : "—") + (Number.isFinite(n) ? "%" : ""); }
+function fmtRatio(n, d=2){ return (Number.isFinite(n) ? n.toFixed(d) : "—") + (Number.isFinite(n) ? "×" : ""); }
+function fmtShort(n){
+  if(!Number.isFinite(n)) return "";
+  const a=Math.abs(n);
+  if(a>=1_000_000) return "$" + (n/1_000_000).toFixed(2) + "M";
+  if(a>=1000) return "$" + Math.round(n/1000).toLocaleString("en-US") + "k";
+  return "$" + Math.round(n).toLocaleString("en-US");
+}
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m])); }
+function monthName(mx){
+  const y=Math.floor(mx/100), m=mx%100;
+  const dt=new Date(y, m-1, 1);
+  return dt.toLocaleString("en-US",{month:"short"});
+}
+function tagClassYoY(pct){
+  if(!Number.isFinite(pct)) return "tag-note";
+  return pct>=2 ? "tag-ok" : (pct<0 ? "tag-warn" : "tag-note");
+}
+function tagClassMkdn(p){
+  if(!Number.isFinite(p)) return "tag-note";
+  return p<=4 ? "tag-ok" : (p<=7 ? "tag-warn" : "tag-risk");
+}
+function tagClassRatio(x){
+  if(!Number.isFinite(x)) return "tag-note";
+  return x<=5 ? "tag-ok" : (x<=10 ? "tag-warn" : "tag-risk");
+}
+function colorMixGap(pp){
+  if(!Number.isFinite(pp)) return "#ffffff";
+  if(pp>=6) return "rgb(231,246,236)";
+  if(pp>=3) return "rgb(239,250,243)";
+  if(pp>=1) return "rgb(247,253,250)";
+  if(pp>-1) return "rgb(255,255,255)";
+  if(pp>-3) return "rgb(255,252,251)";
+  if(pp>-6) return "rgb(255,246,245)";
+  return "rgb(255,240,239)";
+}
+function colorYoYIndex(v){
+  if(v==="NEW") v=110;
+  if(!Number.isFinite(v)) return "#ffffff";
+  if(v<85) return "#fee2e2";
+  if(v<95) return "#ffedd5";
+  if(v<105) return "#f3f4f6";
+  if(v<115) return "#dcfce7";
+  return "#bbf7d0";
+}
+function colorGM(v){
+  if(!Number.isFinite(v)) return "#ffffff";
+  if(v<60) return "#fee2e2";
+  if(v<65) return "#ffedd5";
+  if(v<70) return "#f3f4f6";
+  if(v<75) return "#dcfce7";
+  return "#bbf7d0";
+}
+function colorMKDN(v){
+  if(!Number.isFinite(v)) return "#ffffff";
+  if(v<=2) return "#bbf7d0";
+  if(v<=4) return "#dcfce7";
+  if(v<=6) return "#f3f4f6";
+  if(v<=9) return "#ffedd5";
+  return "#fee2e2";
+}
+function colorRatio(v){
+  if(!Number.isFinite(v)) return "#ffffff";
+  if(v<=3) return "#bbf7d0";
+  if(v<=5) return "#dcfce7";
+  if(v<=8) return "#f3f4f6";
+  if(v<=12) return "#ffedd5";
+  return "#fee2e2";
+}
+function percentile(arr, p){
+  const a=arr.filter(Number.isFinite).slice().sort((x,y)=>x-y);
+  if(!a.length) return 0;
+  const idx=(a.length-1)*p;
+  const lo=Math.floor(idx), hi=Math.ceil(idx);
+  if(lo===hi) return a[lo];
+  return a[lo] + (a[hi]-a[lo])*(idx-lo);
+}
+
+/* ---------- CSV parsing (simple + robust enough for your exports) ---------- */
+function parseCSV(text){
+  // Handles quotes, commas, CRLF. No external libs.
+  const rows=[];
+  let i=0, field="", row=[], inQuotes=false;
+  const pushField=()=>{ row.push(field); field=""; };
+  const pushRow=()=>{ rows.push(row); row=[]; };
+
+  while(i<text.length){
+    const c=text[i];
+    if(inQuotes){
+      if(c === '"'){
+        if(text[i+1] === '"'){ field+='"'; i+=2; continue; }
+        inQuotes=false; i++; continue;
+      }
+      field+=c; i++; continue;
+    }else{
+      if(c === '"'){ inQuotes=true; i++; continue; }
+      if(c === ","){ pushField(); i++; continue; }
+      if(c === "\r"){ i++; continue; }
+      if(c === "\n"){ pushField(); pushRow(); i++; continue; }
+      field+=c; i++; continue;
+    }
+  }
+  pushField(); pushRow();
+  // drop empty trailing
+  while(rows.length && rows[rows.length-1].every(v=>String(v).trim()==="")) rows.pop();
+  const header=rows.shift().map(h=>String(h).trim());
+  return rows.map(r=>{
+    const o={};
+    for(let j=0;j<header.length;j++) o[header[j]]=r[j];
+    return o;
+  });
+}
+
+/* ---------- Aggregation helpers ---------- */
+function keyOf(obj, keys){ return keys.map(k=>String(obj[k] ?? "")).join("␟"); }
+function groupSum(data, keys, sumCols){
+  const map=new Map();
+  for(const d of data){
+    const k=keyOf(d, keys);
+    if(!map.has(k)){
+      const base={};
+      for(const kk of keys) base[kk]=d[kk];
+      for(const sc of sumCols) base[sc]=0;
+      map.set(k, base);
+    }
+    const t=map.get(k);
+    for(const sc of sumCols) t[sc]+=num(d[sc]);
+  }
+  return Array.from(map.values());
+}
+
+/* ---------- Build report ---------- */
+let lastFileText=null;
+document.getElementById("csvFile").addEventListener("change", async (e)=>{
+  const f=e.target.files?.[0];
+  if(!f) return;
+  const txt=await f.text();
+  lastFileText=txt;
+  build(txt, f.name);
+});
+document.getElementById("demoBtn").addEventListener("click", ()=>{
+  if(!lastFileText){ setErr("No prior file selected yet."); return; }
+  build(lastFileText, "last-selected.csv");
+});
+
+function setErr(msg){ document.getElementById("err").textContent = msg || ""; }
+
+function build(csvText, fileName){
+  try{
+    setErr("");
+    const raw=parseCSV(csvText);
+
+    // Normalize columns
+    const hasYR = raw.length && ("YR" in raw[0]);
+    const data=raw.map(r=>({
+      MX: num(r.MX),
+      YR: hasYR ? num(r.YR) : null,
+      Category: isBlank(r.Category) ? null : String(r.Category),
+      DeptID: isBlank(r.DeptID) ? null : String(r.DeptID),
+      ClassID: isBlank(r.ClassID) ? null : String(r.ClassID),
+      Sales: num(r.Sales),
+      SalesLY: num(r.SalesLY),
+      Units: num(r.Units),
+      UnitsLY: num(r.UnitsLY),
+      GM: num(r.GM),
+      MKDN: num(r.MKDN),
+      Stock: num(r.Stock),
+      StockLY: num(r.StockLY)
+    })).filter(r=>r.MX>0);
+
+    const d2025 = hasYR ? data.filter(r=>r.YR===2025) : data;
+
+    if(!d2025.length){ setErr("No rows found for YR=2025 (or dataset empty)."); return; }
+
+    // Title
+    const titleGuess = fileName.toLowerCase().includes("clothing") ? "Clothing" :
+                       fileName.toLowerCase().includes("souvenir") ? "Souvenirs" : "Merchandise";
+    document.getElementById("title").textContent = `2026 Assortment Plan — 2025 Retail Calendar White Space Analysis (${titleGuess})`;
+    document.getElementById("subtitle").innerHTML =
+      `Audience: Retail Executives &amp; Senior Assortment Planners · Dataset: <span class="mono">${escapeHtml(fileName)}</span> · Stock/StockLY assumed <b>Retail EOM</b>.`;
+
+    // Months
+    const months = Array.from(new Set(d2025.map(r=>r.MX))).sort((a,b)=>a-b);
+    const monthNames = months.map(monthName);
+
+    // Overall
+    const sumCols=["Sales","SalesLY","Units","UnitsLY","GM","MKDN","Stock","StockLY"];
+    const overall=sumCols.reduce((acc,c)=> (acc[c]=d2025.reduce((s,r)=>s+r[c],0), acc), {});
+    const salesYoY = overall.SalesLY ? (overall.Sales/overall.SalesLY - 1)*100 : NaN;
+    const unitsYoY = overall.UnitsLY ? (overall.Units/overall.UnitsLY - 1)*100 : NaN;
+    const stockYoY = overall.StockLY ? (overall.Stock/overall.StockLY - 1)*100 : NaN;
+    const gmPct = overall.Sales ? (overall.GM/overall.Sales)*100 : NaN;
+    const mkdnPct = overall.Sales ? (overall.MKDN/overall.Sales)*100 : NaN;
+    const profitPct = overall.Sales ? ((overall.GM-overall.MKDN)/overall.Sales)*100 : NaN;
+    const stockSales = overall.Sales ? (overall.Stock/overall.Sales) : NaN;
+    const aur = overall.Units ? (overall.Sales/overall.Units) : NaN;
+
+    // Monthly totals
+    const m = groupSum(d2025, ["MX"], sumCols).sort((a,b)=>a.MX-b.MX);
+    const totSales = m.reduce((s,r)=>s+r.Sales,0);
+    const calendarRows = m.map(r=>{
+      const sShare = totSales ? (r.Sales/totSales)*100 : NaN;
+      const sYoY = r.SalesLY ? (r.Sales/r.SalesLY - 1)*100 : NaN;
+      const stYoY = r.StockLY ? (r.Stock/r.StockLY - 1)*100 : NaN;
+      const g = r.Sales ? (r.GM/r.Sales)*100 : NaN;
+      const md = r.Sales ? (r.MKDN/r.Sales)*100 : NaN;
+      const pr = r.Sales ? ((r.GM-r.MKDN)/r.Sales)*100 : NaN;
+      const ss = r.Sales ? (r.Stock/r.Sales) : NaN;
+      return { ...r, sShare, sYoY, stYoY, g, md, pr, ss };
+    });
+
+    // Category-month aggregates
+    const catm = groupSum(d2025.filter(r=>r.Category), ["Category","MX"], sumCols);
+    const byMX = new Map();
+    for(const row of catm){
+      const mx=row.MX;
+      if(!byMX.has(mx)) byMX.set(mx,{Sales:0,Stock:0});
+      const t=byMX.get(mx); t.Sales+=row.Sales; t.Stock+=row.Stock;
+    }
+    for(const row of catm){
+      const t=byMX.get(row.MX);
+      row.Sales_share = t.Sales ? (row.Sales/t.Sales)*100 : NaN;
+      row.Stock_share = t.Stock ? (row.Stock/t.Stock)*100 : NaN;
+      row.MixGap_pp = row.Sales_share - row.Stock_share;
+      row.GM_pct = row.Sales ? (row.GM/row.Sales)*100 : NaN;
+      row.MKDN_pct = row.Sales ? (row.MKDN/row.Sales)*100 : NaN;
+      row.Stock_Sales = row.Sales ? (row.Stock/row.Sales) : NaN;
+    }
+    const cats = Array.from(new Set(catm.map(r=>r.Category))).sort((a,b)=>String(a).localeCompare(String(b)));
+
+    // Category annual summary
+    const cata = groupSum(d2025.filter(r=>r.Category), ["Category"], sumCols);
+    const totStock = cata.reduce((s,r)=>s+r.Stock,0);
+    for(const r of cata){
+      r.Sales_share = overall.Sales ? (r.Sales/overall.Sales)*100 : NaN;
+      r.Stock_share = overall.Stock ? (r.Stock/overall.Stock)*100 : NaN;
+      r.Sales_yoy = r.SalesLY ? (r.Sales/r.SalesLY - 1)*100 : NaN;
+      r.Stock_yoy = r.StockLY ? (r.Stock/r.StockLY - 1)*100 : NaN;
+      r.GM_pct = r.Sales ? (r.GM/r.Sales)*100 : NaN;
+      r.MKDN_pct = r.Sales ? (r.MKDN/r.Sales)*100 : NaN;
+      r.Stock_Sales = r.Sales ? (r.Stock/r.Sales) : NaN;
+    }
+    cata.sort((a,b)=>b.Sales-a.Sales);
+
+    // Pockets (category-month)
+    const salesArr = catm.map(r=>r.Sales);
+    const hi = percentile(salesArr, 0.75);
+    const lo = percentile(salesArr, 0.25);
+    const tight = catm.filter(r=>r.Sales>=hi).slice().sort((a,b)=>(a.Stock_Sales??1e9)-(b.Stock_Sales??1e9)).slice(0,15);
+    const over  = catm.filter(r=>r.Sales<=lo).slice().sort((a,b)=>(b.Stock_Sales??-1)-(a.Stock_Sales??-1)).slice(0,15);
+
+    // Class heatmaps
+    function clsLabel(r){
+      return `${r.Category ?? "—"} | ${r.DeptID ?? "—"} | ${r.ClassID ?? "—"}`;
+    }
+    const dCls = d2025.filter(r=>r.Category && r.ClassID);
+    for(const r of dCls) r.Label = clsLabel(r);
+
+    const clsA = groupSum(dCls, ["Label"], sumCols).sort((a,b)=>b.Sales-a.Sales);
+    const top25 = clsA.slice(0,25).map(r=>r.Label);
+    const top50 = clsA.slice(0,50).map(r=>r.Label);
+    const annualSalesMap = new Map(clsA.map(r=>[r.Label, r.Sales]));
+
+    const clsM = groupSum(dCls, ["Label","MX"], sumCols);
+    const clsIdx = new Map(clsM.map(r=>[`${r.Label}␟${r.MX}`, r]));
+
+    function cellYoY(label, mx, col){
+      const row = clsIdx.get(`${label}␟${mx}`);
+      if(!row) return null;
+      const cur=row[col]||0, ly=row[col+"LY"]||0;
+      if(ly===0) return cur===0 ? null : "NEW";
+      return (cur/ly)*100;
+    }
+    function cellPct(label, mx, numCol){
+      const row = clsIdx.get(`${label}␟${mx}`);
+      if(!row) return null;
+      const s=row.Sales||0;
+      if(s===0) return null;
+      return (row[numCol]||0)/s*100;
+    }
+    function cellRatio(label, mx){
+      const row = clsIdx.get(`${label}␟${mx}`);
+      if(!row) return null;
+      const s=row.Sales||0;
+      if(s===0) return null;
+      return (row.Stock||0)/s;
+    }
+
+    function buildClassHeat(labels, metric){
+      const th = `<tr><th>Class (Category | Dept | Class)</th><th style="text-align:right">Sales 2025</th>${monthNames.map(m=>`<th style="text-align:right">${escapeHtml(m)}</th>`).join("")}</tr>`;
+      const body = labels.map(label=>{
+        const cells = months.map(mx=>{
+          if(metric==="sales_yoy"){
+            const v=cellYoY(label,mx,"Sales");
+            const bg=colorYoYIndex(v);
+            const disp = (v===null) ? "" : (v==="NEW" ? "NEW" : `${Math.round(v)}%`);
+            return `<td style="background:${bg};text-align:right">${disp}</td>`;
+          }
+          if(metric==="gm"){
+            const v=cellPct(label,mx,"GM");
+            return `<td style="background:${colorGM(v)};text-align:right">${v===null?"":v.toFixed(1)+"%"}</td>`;
+          }
+          if(metric==="mkdn"){
+            const v=cellPct(label,mx,"MKDN");
+            return `<td style="background:${colorMKDN(v)};text-align:right">${v===null?"":v.toFixed(1)+"%"}</td>`;
+          }
+          if(metric==="stock_yoy"){
+            const v=cellYoY(label,mx,"Stock");
+            const bg=colorYoYIndex(v);
+            const disp = (v===null) ? "" : (v==="NEW" ? "NEW" : `${Math.round(v)}%`);
+            return `<td style="background:${bg};text-align:right">${disp}</td>`;
+          }
+          if(metric==="ratio"){
+            const v=cellRatio(label,mx);
+            return `<td style="background:${colorRatio(v)};text-align:right">${v===null?"":v.toFixed(2)+"×"}</td>`;
+          }
+          return `<td></td>`;
+        }).join("");
+        return `<tr><td><strong>${escapeHtml(label)}</strong></td><td style="text-align:right">${escapeHtml(fmtShort(annualSalesMap.get(label)||0))}</td>${cells}</tr>`;
+      }).join("");
+      return `<div class="table-wrap"><table class="heat"><thead>${th}</thead><tbody>${body}</tbody></table></div>`;
+    }
+
+    // Mix heatmap table
+    const mixTH = `<tr><th class="sticky">Category</th>${monthNames.map(mn=>`<th>${escapeHtml(mn)}</th>`).join("")}</tr>`;
+    const mixBody = cats.map(cat=>{
+      const tds = months.map(mx=>{
+        const row = catm.find(r=>r.Category===cat && r.MX===mx);
+        if(!row) return "<td></td>";
+        const pp=row.MixGap_pp;
+        const disp = Number.isFinite(pp) ? (pp>=0?`+${pp.toFixed(1)}pp`:`${pp.toFixed(1)}pp`) : "";
+        return `<td style="background:${colorMixGap(pp)}"><div class="cell"><div class="val">${disp}</div><div class="sub">${escapeHtml(fmtShort(row.Sales))}</div></div></td>`;
+      }).join("");
+      return `<tr><td class="sticky"><span class="mono">${escapeHtml(cat)}</span></td>${tds}</tr>`;
+    }).join("");
+    const mixTable = `<div class="table-wrap"><table class="heatmap">${mixTH}${mixBody}</table></div>`;
+
+    // Render report HTML
+    const report = `
+<section class="card" id="snapshot">
+  <h2>Portfolio Snapshot</h2>
+  <div class="kpis">
+    <div class="kpi"><div class="kpi-title">Net Sales (2025)</div><div class="kpi-val">${fmtMoney(overall.Sales)}</div><div class="kpi-sub">YoY: ${fmtPct(salesYoY,1)}</div></div>
+    <div class="kpi"><div class="kpi-title">Units (2025)</div><div class="kpi-val">${Math.round(overall.Units).toLocaleString("en-US")}</div><div class="kpi-sub">YoY: ${fmtPct(unitsYoY,1)}</div></div>
+    <div class="kpi"><div class="kpi-title">AUR</div><div class="kpi-val">${Number.isFinite(aur) ? ("$"+aur.toFixed(2)) : "—"}</div><div class="kpi-sub">Sales / Units</div></div>
+    <div class="kpi"><div class="kpi-title">GM% / GM$</div><div class="kpi-val">${fmtPct(gmPct,1)} · ${fmtMoney(overall.GM)}</div><div class="kpi-sub">Margin quality</div></div>
+    <div class="kpi"><div class="kpi-title">MKDN% / $</div><div class="kpi-val">${fmtPct(mkdnPct,1)} · ${fmtMoney(overall.MKDN)}</div><div class="kpi-sub">Promo pressure</div></div>
+    <div class="kpi"><div class="kpi-title">Stock (EOM) / Stock:Sales</div><div class="kpi-val">${fmtMoney(overall.Stock)} · ${fmtRatio(stockSales,2)}</div><div class="kpi-sub">Stock YoY: ${fmtPct(stockYoY,1)}</div></div>
+  </div>
+  <div class="callout" style="margin-top:10px">
+    <b>White space definition (with EOM stock)</b>
+    Mix White Space = <b>Sales Share − Stock Share</b> within each month. Positive = sells ahead of stock mix (white space). Negative = stock-heavy vs demand (risk).
+  </div>
+</section>
+
+<section class="card" id="calendar">
+  <h2>Retail Calendar 2025</h2>
+  <div class="subhead">Monthly performance including EOM Stock and exposure (Stock:Sales).</div>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Retail Period (MX)</th>
+        <th class="num">Sales</th>
+        <th class="num">Sales YoY</th>
+        <th>Seasonality (Sales Share)</th>
+        <th class="num">GM%</th>
+        <th>MKDN%</th>
+        <th>Profit%</th>
+        <th class="num">Stock (EOM)</th>
+        <th class="num">Stock YoY</th>
+        <th class="num">Stock:Sales</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${calendarRows.map(r=>{
+        const period = `${Math.floor(r.MX/100)}-${String(r.MX%100).padStart(2,"0")}`;
+        const barw = Number.isFinite(r.sShare) ? r.sShare : 0;
+        return `
+        <tr>
+          <td>${period}</td>
+          <td class="num">${fmtMoney(r.Sales)}</td>
+          <td class="num"><span class="tag ${tagClassYoY(r.sYoY)}">${fmtPct(r.sYoY,1)}</span></td>
+          <td><div class="bar"><span style="width:${barw.toFixed(1)}%"></span></div><div class="sub">${barw.toFixed(1)}% of year</div></td>
+          <td class="num">${fmtPct(r.g,1)}</td>
+          <td><span class="tag ${tagClassMkdn(r.md)}">${fmtPct(r.md,1)}</span></td>
+          <td><span class="tag tag-note">${fmtPct(r.pr,1)}</span></td>
+          <td class="num">${fmtMoney(r.Stock)}</td>
+          <td class="num"><span class="tag ${tagClassYoY(r.stYoY)}">${fmtPct(r.stYoY,1)}</span></td>
+          <td class="num"><span class="tag ${tagClassRatio(r.ss)}">${fmtRatio(r.ss,2)}</span></td>
+        </tr>`;
+      }).join("")}
+    </tbody>
+  </table>
+  <div class="note">Profit% proxy = (GM − MKDN) / Sales. Stock:Sales = Retail EOM stock / month sales.</div>
+</section>
+
+<section class="card" id="mix">
+  <h2>Mix White Space (Sales vs Stock)</h2>
+  <div class="subhead">Positive = demand ahead of stock mix; negative = stock-heavy vs demand.</div>
+  ${mixTable}
+  <div class="note">Cell shows Mix Gap (pp) and Sales ($). Green = positive; red = negative; white = balanced.</div>
+</section>
+
+<section class="card" id="category-summary">
+  <h2>Category Summary (Annual)</h2>
+  <div class="subhead">Sales, margin, markdown, and stock exposure by category (EOM stock included).</div>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th class="num">Sales</th>
+        <th class="num">Sales Share</th>
+        <th class="num">Sales YoY</th>
+        <th class="num">GM%</th>
+        <th>MKDN%</th>
+        <th class="num">Stock (EOM)</th>
+        <th class="num">Stock Share</th>
+        <th class="num">Stock YoY</th>
+        <th class="num">Stock:Sales</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${cata.map(r=>`
+        <tr>
+          <td><span class="mono">${escapeHtml(r.Category)}</span></td>
+          <td class="num">${fmtMoney(r.Sales)}</td>
+          <td class="num">${fmtPct(r.Sales_share,1)}</td>
+          <td class="num"><span class="tag ${tagClassYoY(r.Sales_yoy)}">${fmtPct(r.Sales_yoy,1)}</span></td>
+          <td class="num">${fmtPct(r.GM_pct,1)}</td>
+          <td><span class="tag ${tagClassMkdn(r.MKDN_pct)}">${fmtPct(r.MKDN_pct,1)}</span></td>
+          <td class="num">${fmtMoney(r.Stock)}</td>
+          <td class="num">${fmtPct(r.Stock_share,1)}</td>
+          <td class="num"><span class="tag ${tagClassYoY(r.Stock_yoy)}">${fmtPct(r.Stock_yoy,1)}</span></td>
+          <td class="num"><span class="tag ${tagClassRatio(r.Stock_Sales)}">${fmtRatio(r.Stock_Sales,2)}</span></td>
+        </tr>`).join("")}
+    </tbody>
+  </table>
+</section>
+
+<section class="card" id="pockets">
+  <h2>Tightness &amp; Over-Exposure Pockets</h2>
+  <div class="grid2">
+    <div>
+      <h3>Depth tightness pockets (high sales, low Stock:Sales)</h3>
+      <div class="subhead">Likely candidates for deeper coverage or earlier receipts in 2026.</div>
+      <table class="tbl">
+        <thead><tr><th>Period</th><th>Category</th><th class="num">Sales</th><th class="num">Stock</th><th>Stock:Sales</th><th class="num">GM%</th><th>MKDN%</th></tr></thead>
+        <tbody>
+          ${(tight.length? tight : []).map(r=>`
+            <tr>
+              <td>${Math.floor(r.MX/100)}-${String(r.MX%100).padStart(2,"0")}</td>
+              <td><span class="mono">${escapeHtml(r.Category)}</span></td>
+              <td class="num">${fmtMoney(r.Sales)}</td>
+              <td class="num">${fmtMoney(r.Stock)}</td>
+              <td><span class="tag ${tagClassRatio(r.Stock_Sales)}">${fmtRatio(r.Stock_Sales,2)}</span></td>
+              <td class="num">${fmtPct(r.GM_pct,1)}</td>
+              <td><span class="tag ${tagClassMkdn(r.MKDN_pct)}">${fmtPct(r.MKDN_pct,1)}</span></td>
+            </tr>`).join("") || `<tr><td colspan="7" class="sub">Not enough data to rank pockets.</td></tr>`}
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Over-exposure pockets (low sales, high Stock:Sales)</h3>
+      <div class="subhead">Candidates for SKU rationalization, exits, or tighter receipts.</div>
+      <table class="tbl">
+        <thead><tr><th>Period</th><th>Category</th><th class="num">Sales</th><th class="num">Stock</th><th>Stock:Sales</th><th class="num">GM%</th><th>MKDN%</th></tr></thead>
+        <tbody>
+          ${(over.length? over : []).map(r=>`
+            <tr>
+              <td>${Math.floor(r.MX/100)}-${String(r.MX%100).padStart(2,"0")}</td>
+              <td><span class="mono">${escapeHtml(r.Category)}</span></td>
+              <td class="num">${fmtMoney(r.Sales)}</td>
+              <td class="num">${fmtMoney(r.Stock)}</td>
+              <td><span class="tag ${tagClassRatio(r.Stock_Sales)}">${fmtRatio(r.Stock_Sales,2)}</span></td>
+              <td class="num">${fmtPct(r.GM_pct,1)}</td>
+              <td><span class="tag ${tagClassMkdn(r.MKDN_pct)}">${fmtPct(r.MKDN_pct,1)}</span></td>
+            </tr>`).join("") || `<tr><td colspan="7" class="sub">Not enough data to rank pockets.</td></tr>`}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="card" id="class-heatmaps">
+  <h2>Class Heatmaps (Top 25 / Top 50)</h2>
+  <div class="subhead">Same heatmap set as your Souvenirs report: Sales YoY, GM%, MKDN%, Stock YoY, Stock:Sales.</div>
+
+  <h3>Top 25 — Sales YoY Index</h3>
+  ${buildClassHeat(top25,"sales_yoy")}
+  <h3>Top 25 — GM%</h3>
+  ${buildClassHeat(top25,"gm")}
+  <h3>Top 25 — MKDN%</h3>
+  ${buildClassHeat(top25,"mkdn")}
+  <h3>Top 25 — Stock YoY Index</h3>
+  ${buildClassHeat(top25,"stock_yoy")}
+  <h3>Top 25 — Stock:Sales</h3>
+  ${buildClassHeat(top25,"ratio")}
+
+  <details>
+    <summary>Show Top 50 heatmaps (Sales YoY / GM% / MKDN% / Stock YoY / Stock:Sales)</summary>
+    <h3 style="margin-top:10px">Top 50 — Sales YoY Index</h3>
+    ${buildClassHeat(top50,"sales_yoy")}
+    <h3>Top 50 — GM%</h3>
+    ${buildClassHeat(top50,"gm")}
+    <h3>Top 50 — MKDN%</h3>
+    ${buildClassHeat(top50,"mkdn")}
+    <h3>Top 50 — Stock YoY Index</h3>
+    ${buildClassHeat(top50,"stock_yoy")}
+    <h3>Top 50 — Stock:Sales</h3>
+    ${buildClassHeat(top50,"ratio")}
+  </details>
+
+  <div class="callout" style="margin-top:10px">
+    <b>Planning actions (2026)</b>
+    <ul class="bullets">
+      <li><b>White space to invest:</b> repeated green Sales YoY + positive mix gap + low Stock:Sales.</li>
+      <li><b>Risk to fund investment:</b> repeated amber/red Sales YoY + negative mix gap + high Stock:Sales.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="card" id="assumptions">
+  <h2>Assumptions</h2>
+  <ul class="bullets">
+    <li>Retail periods use <span class="mono">MX</span> (YYYYMM). If <span class="mono">YR</span> exists, the report filters to YR=2025.</li>
+    <li><span class="mono">Stock</span> / <span class="mono">StockLY</span> are treated as <b>Retail EOM stock</b>.</li>
+    <li>Mix White Space = monthly <b>Sales share − Stock share</b>.</li>
+  </ul>
+</section>
+    `;
+
+    document.getElementById("report").innerHTML = report;
+
+  }catch(err){
+    console.error(err);
+    setErr("Could not build report: " + (err?.message || String(err)));
+  }
+}
+</script>
+</body>
+</html>

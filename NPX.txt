@@ -1,0 +1,29 @@
+Here is how you can use npx serve to run your local index.html file on Windows.
+
+Prerequisite
+Ensure you have Node.js installed on your computer, as npx (Node Package Execute) is automatically included with it.
+
+Steps to Run npx serve
+Open your command line interface. You can use Command Prompt (cmd), PowerShell, or the integrated terminal in your code editor (like Visual Studio Code).
+
+Navigate to your project folder. Use the cd (change directory) command to move into the exact folder where your index.html file is located.
+
+DOS
+cd C:\Documents\SRC\PWA
+Run the server. Type the following command and press Enter:
+
+DOS
+npx serve
+What Happens Next
+Installation Prompt: If this is your very first time running this command, npx might ask if you want to install the serve package. Press y and then Enter to proceed.
+
+Local URL: Once the server starts, your terminal will output a network access message displaying a local address, which is usually http://localhost:3000.
+
+View your page: Open your web browser, type that URL into the address bar, and your index.html page will load.
+
+Helpful Command Variations
+Change the port: If port 3000 is already in use by another application, you can specify a different port using the -p flag.
+
+DOS
+npx serve -p 8080
+Stop the server: When you are done testing, click into your terminal window and press Ctrl + C to shut down the local server.
