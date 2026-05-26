@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "echo 'No build step required for vanilla JS'"
+    "build": "echo 'Bypassing front-end compilation rules'"
   
   },
   "dependencies": {
@@ -11,5 +11,5 @@
     "fast-xml-parser": "^5.8.0",
     "mssql": "^12.5.4"
   },
-  "main": "functions/*.js"
+  "main": "src/functions/*.js"
 }
