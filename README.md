@@ -143,3 +143,7 @@ Add this JSON payload to your S3 Bucket -> Permissions -> CORS settings
         "ExposeHeaders": ["Last-Modified"]
     }
 ]
+
+
+Using SQL Azure Web App
+https://icy-bay-0f47fa910.7.azurestaticapps.net/
