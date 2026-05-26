@@ -122,10 +122,9 @@ fetch(apiUrl)
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    return response.text(); // Parse the response stream as a raw text string
+    return response.text(); 
   })
   .then(csvText => {
-    // 4. Pass the raw CSV text and file name straight into your build engine
     build(csvText, fileName); 
   })
   .catch(error => {
