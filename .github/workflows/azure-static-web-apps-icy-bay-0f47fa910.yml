@@ -31,7 +31,8 @@ jobs:
           app_location: "/" # App source code path
           api_location: "api" # Api source code path - optional
           output_location: "." # Built app content directory - optional
-          skip_app_build: false # 👈 Add this exact line to skip compilation steps
+          skip_app_build: true # 👈 Skips compiling your plain HTML frontend
+          skip_api_build: false # 👈 Tells Azure to install dependencies for your SQL API
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
